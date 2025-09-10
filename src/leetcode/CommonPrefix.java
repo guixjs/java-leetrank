@@ -24,6 +24,10 @@ public class CommonPrefix {
       isPrefix = true;
       while (isPrefix && letra < prefix.length()) {
 
+        if (nextWord.length() < 1) {
+          return "";
+        }
+
         if (prefix.charAt(letra) == nextWord.charAt(letra)) {
           letra++;
         } else {
