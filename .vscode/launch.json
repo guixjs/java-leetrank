@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "ValidParentheses",
+      "request": "launch",
+      "mainClass": "leetcode.ValidParentheses",
+      "projectName": "java-leet-rank_70948b8d"
+    },
+    {
+      "type": "java",
       "name": "Current File",
       "request": "launch",
       "mainClass": "${file}"
