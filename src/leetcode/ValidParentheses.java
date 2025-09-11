@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ValidParentheses {
   public static void main(String[] args) {
-    String s = "{()}";
+    String s = "([])";
     System.out.println(solution(s));
   }
 
@@ -23,12 +23,13 @@ public class ValidParentheses {
         ']', 2,
         '}', 3);
 
-    List<Character> abertos = List.of('(', '{', '[');
+    List<Character> fechados = List.of(')', '}', ']');
 
     int atual = 0;
     int prox = atual + 1;
+    int isValid = 0;
 
-    while (prox < s.length()) {
+    while (atual < s.length() && prox < s.length()) {
 
       char simboloAtual = s.charAt(atual);
       char simboloProx = s.charAt(prox);
@@ -36,17 +37,28 @@ public class ValidParentheses {
       int pesoAtual = pesos.get(simboloAtual);
       int pesoProx = pesos.get(simboloProx);
 
-      if (pesoAtual == pesoProx) {
+      if (fechados.contains(simboloAtual)) {
+        if (fechados.contains(simboloProx) && isValid == 0) {
+          return false;
+        }
         atual++;
         prox = atual + 1;
+        // isValid += pesoProx;
+      } else if (pesoAtual == pesoProx) {
+        atual++;
+        prox = atual + 1;
+        isValid -= pesoProx;
       } else {
         prox++;
+        isValid += pesoProx;
       }
-      if (!abertos.contains(simboloAtual)) {
-        return false;
-      }
+
     }
 
-    return true;
+    if (isValid <= 0) {
+      return true;
+    }
+    return false;
+
   }
 }
